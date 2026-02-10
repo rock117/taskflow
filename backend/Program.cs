@@ -304,12 +304,12 @@ builder.Services.AddLogging(loggingBuilder =>
 // ============================================================
 // 11. 添加应用服务（依赖注入）
 // ============================================================
-// 这里将注册所有的服务和仓储
-// builder.Services.AddScoped<IUserService, UserService>();
-// builder.Services.AddScoped<IProjectService, ProjectService>();
-// builder.Services.AddScoped<ITaskService, TaskService>();
-// builder.Services.AddScoped<ICommentService, CommentService>();
-// builder.Services.AddScoped<IAttachmentService, AttachmentService>();
+// 注册所有服务和仓储
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IAttachmentService, AttachmentService>();
 
 // ============================================================
 // 12. 配置 AutoMapper

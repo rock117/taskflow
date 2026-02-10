@@ -6,11 +6,9 @@ import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
 
 // 页面组件
-import LoginPage from './pages/auth/LoginPage';
-import RegisterPage from './pages/auth/RegisterPage';
+import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ProjectsPage from './pages/ProjectsPage';
-import ProjectDetailPage from './pages/ProjectDetailPage';
 import TaskDetailPage from './pages/TaskDetailPage';
 import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -57,7 +55,7 @@ function App() {
   const location = useLocation();
 
   // 根据路由决定使用哪个布局
-  const isAuthRoute = ['/login', '/register'].includes(location.pathname);
+  const isAuthRoute = location.pathname === '/login';
 
   return (
     <ConfigProvider>
@@ -68,17 +66,9 @@ function App() {
               path="/login"
               element={
                 <PublicRoute>
-                  <LoginPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <PublicRoute>
-                  <RegisterPage />
-                </PublicRoute>
-              }
+                    <LoginPage />
+                  </PublicRoute>
+                }
             />
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
@@ -90,48 +80,44 @@ function App() {
               path="/"
               element={
                 <ProtectedRoute>
-                  <DashboardPage />
-                </ProtectedRoute>
-              }
+                    <DashboardPage />
+                  </ProtectedRoute>
+                }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                    <DashboardPage />
+                  </ProtectedRoute>
+                }
             />
             <Route
               path="/projects"
               element={
                 <ProtectedRoute>
-                  <ProjectsPage />
-                </ProtectedRoute>
-              }
+                    <ProjectsPage />
+                  </ProtectedRoute>
+                }
             />
             <Route
-              path="/projects/:id"
+              path="/tasks/:taskId"
               element={
                 <ProtectedRoute>
-                  <ProjectDetailPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/tasks/:id"
-              element={
-                <ProtectedRoute>
-                  <TaskDetailPage />
-                </ProtectedRoute>
-              }
+                    <TaskDetailPage />
+                  </ProtectedRoute>
+                }
             />
             <Route
               path="/profile"
               element={
                 <ProtectedRoute>
-                  <ProfilePage />
-                </ProtectedRoute>
-              }
+                    <ProfilePage />
+                  </ProtectedRoute>
+                }
             />
             <Route
               path="/login"
-              element={<Navigate to="/" replace />}
-            />
-            <Route
-              path="/register"
               element={<Navigate to="/" replace />}
             />
             <Route path="*" element={<NotFoundPage />} />
